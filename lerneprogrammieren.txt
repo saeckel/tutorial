@@ -1,1 +1,2 @@
-# This coud be source code
+# This could be source code
+# ...and this is another commentary
