@@ -2,28 +2,7 @@
 #!/usr/bin/python3
 
 import tkinter as tk
-import datetime
-from datetime import date as dt
-
-class Vokabel:
-    def __init__(self, de, fr):
-        self.deutsch = de
-        self.fremd = fr
-        self.nextQuiz = datetime.date.today()
-        self.kategorie = 1
-        self.anz_richtig = 0
-        self.anz_falsch = 0
-
-    def richtig(self):
-        self.anz_richtig = self.anz_richtig + 1
-        self.kategorie = self.kategorie + 1
-        # How many days until next quiz? 
-        int_next_quiz = 2**(self.kategorie-1)
-        # Calc next quiz-date
-        datediff = datetime.timedelta(days=int_next_quiz)
-        self.nextQuiz = self.today() + datediff
-
-
+import Vokabel
 
 window = tk.Tk()
 frm_deutsch = tk.Frame(
@@ -32,15 +11,21 @@ frm_deutsch = tk.Frame(
     padx=5,
     pady=5,
 )
-frm_englisch = tk.Frame(
+frm_fremd = tk.Frame(
     relief=tk.RIDGE,
     borderwidth=1,
     padx=5,
     pady=5,
 )
+frm_buttons = tk.Frame(
+    relief=tk.RIDGE,
+    borderwidth=1,
+    padx=5,
+    pady=5,    
+)
 
-lbl_englisch = tk.Label(
-    master=frm_englisch,
+lbl_fremd = tk.Label(
+    master=frm_fremd,
     text="Englisch: ",
 #    fg="white",
 #    bg="black",
@@ -54,19 +39,30 @@ lbl_deutsch = tk.Label(
 )
 
 btn_check = tk.Button(
+    master = frm_buttons,
     text="Check answer",
 #    width=25,
     height=2,
 #    bg="blue",
 #    fg="yellow"
 )
+btn_load = tk.Button(
+    master=frm_buttons,
+    text="Laden",
+    height=2,
+)
+btn_save = tk.Button(
+    master=frm_buttons,
+    text="Speichern",
+    height=2,
+)
 
 lbl_result = tk.Label(
     font=("Arial", 25)
 )
 
-ent_englisch = tk.Entry(
-    master=frm_englisch,
+ent_fremd = tk.Entry(
+    master=frm_fremd,
     disabledforeground='black',
 #    state=tk.DISABLED,
 #    fg="yellow", 
@@ -78,18 +74,22 @@ ent_deutsch = tk.Entry(
 )
 
 # Building the window
-lbl_englisch.pack(side=tk.LEFT)
-ent_englisch.pack()
+lbl_fremd.pack(side=tk.LEFT)
+ent_fremd.pack()
 lbl_deutsch.pack(side=tk.LEFT)
 ent_deutsch.pack()
-frm_englisch.pack()
+frm_fremd.pack()
 frm_deutsch.pack()
-btn_check.pack()
 lbl_result.pack()
+btn_load.pack(side=tk.LEFT)
+btn_check.pack(side=tk.LEFT)
+btn_save.pack(side=tk.LEFT)
+frm_buttons.pack()
 
-ent_englisch.delete(0,tk.END)           # delete everything
-ent_englisch.insert(0, 'table')       
-ent_englisch.config(state=tk.DISABLED)  # Disable English label
+
+ent_fremd.delete(0,tk.END)           # delete everything
+ent_fremd.insert(0, 'table')       
+ent_fremd.config(state=tk.DISABLED)  # Disable English label
 
 def spellcheck(event):
     answer = ent_deutsch.get() # ent_deutsch auslesen
