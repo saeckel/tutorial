@@ -26,4 +26,4 @@ class Vokabel:
         int_next_quiz = 2**(self.kategorie-1)
         # Calc next quiz-date
         datediff = datetime.timedelta(days=int_next_quiz)
-        self.nextQuiz = self.today() + datediff
+        self.nextQuiz = datetime.date.today() + datediff
