@@ -2,6 +2,28 @@
 #!/usr/bin/python3
 
 import tkinter as tk
+import datetime
+from datetime import date as dt
+
+class Vokabel:
+    def __init__(self, de, fr):
+        self.deutsch = de
+        self.fremd = fr
+        self.nextQuiz = datetime.date.today()
+        self.kategorie = 1
+        self.anz_richtig = 0
+        self.anz_falsch = 0
+
+    def richtig(self):
+        self.anz_richtig = self.anz_richtig + 1
+        self.kategorie = self.kategorie + 1
+        # How many days until next quiz? 
+        int_next_quiz = 2**(self.kategorie-1)
+        # Calc next quiz-date
+        datediff = datetime.timedelta(days=int_next_quiz)
+        self.nextQuiz = self.today() + datediff
+
+
 
 window = tk.Tk()
 frm_deutsch = tk.Frame(
