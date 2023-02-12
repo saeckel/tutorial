@@ -6,7 +6,7 @@ class Vokabel:
     def __init__(self, de, fr):
         self.deutsch = de
         self.fremd = fr
-        self.nextQuiz = datetime.date.today()
+        self.next_quiz = datetime.date.today()
         self.kategorie = 1
         self.anz_richtig = 0
         self.anz_falsch = 0
